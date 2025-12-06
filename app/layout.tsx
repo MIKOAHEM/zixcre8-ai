@@ -1,18 +1,12 @@
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Zixcre8-ai",
-  description: "Veo 3 + 3D + Gemini AI",
+export const metadata = {
+  title: "Zixcre8 AI",
+  description: "AI-powered creative experience"
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-black text-white antialiased">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
