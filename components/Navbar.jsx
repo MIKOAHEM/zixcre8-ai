@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
@@ -12,9 +13,8 @@ export default function Navbar() {
       </div>
 
       <nav className="nav-links small">
-        <a href="#" style={{color:"var(--muted)",textDecoration:"none"}}>Home</a>
-        <a href="#work" style={{color:"var(--muted)",textDecoration:"none"}}>Work</a>
-        <a href="#tools" style={{color:"var(--muted)",textDecoration:"none"}}>Tools</a>
+        <Link href="/" style={{color:"var(--muted)",textDecoration:"none"}}>Home</Link>
+        <Link href="/#tools" style={{color:"var(--muted)",textDecoration:"none"}}>Tools</Link>
         <button className="button">Get Started</button>
       </nav>
     </header>
