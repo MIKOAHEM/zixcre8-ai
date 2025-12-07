@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "vercel-build": "next build"
   },
   "dependencies": {
@@ -16,6 +15,6 @@
     "framer-motion": "^11.2.10",
     "@react-three/fiber": "^8.16.8",
     "@react-three/drei": "^9.109.2",
-    "three": "^0.164.0"
+    "three": "^0.164.1"
   }
 }
