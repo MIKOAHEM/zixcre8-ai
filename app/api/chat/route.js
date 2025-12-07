@@ -1,37 +1,36 @@
-import { NextResponse } from "next/server";
+import OpenAI from "openai";
 
 export async function POST(req) {
   try {
-    const { messages } = await req.json();
+    const { message } = await req.json();
 
-    const OPENAI_KEY = process.env.OPENAI_API_KEY;
-    if (!OPENAI_KEY) {
-      return NextResponse.json({ error: "OpenAI key not configured" }, { status: 500 });
+    if (!message) {
+      return new Response(JSON.stringify({ error: "No message provided" }), {
+        status: 400,
+      });
     }
 
-    // Forward to OpenAI Chat completions (example uses fetch to OpenAI v1/chat/completions).
-    const resp = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${OPENAI_KEY}`
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini", // replace with your preferred model
-        messages: messages,
-        max_tokens: 400
-      })
+    const client = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
     });
 
-    if (!resp.ok) {
-      const txt = await resp.text();
-      return NextResponse.json({ error: txt }, { status: 500 });
-    }
+    const completion = await client.responses.create({
+      model: "gpt-4.1-mini",
+      input: message,
+    });
 
-    const data = await resp.json();
-    const reply = data?.choices?.[0]?.message?.content ?? "No reply";
-    return NextResponse.json({ reply });
+    const reply = completion.output_text || "I have no response";
+
+    return new Response(JSON.stringify({ reply }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    console.error("Chat API error:", err);
+
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), {
+      status: 500,
+    });
   }
 }
