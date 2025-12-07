@@ -1,18 +1,32 @@
-import OpenAI from "openai";
+import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  const { messages } = await req.json();
+  try {
+    const { messages } = await req.json();
 
-  const client = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: "Missing OPENAI_API_KEY" },
+        { status: 500 }
+      );
+    }
 
-  const response = await client.chat.completions.create({
-    model: "gpt-4o-mini",
-    messages,
-  });
+    const completion = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages,
+      }),
+    });
 
-  return new Response(JSON.stringify(response.choices[0].message), {
-    headers: { "Content-Type": "application/json" },
-  });
+    const data = await completion.json();
+    return NextResponse.json(data);
+  } catch (e) {
+    return NextResponse.json({ error: e.message }, { status: 500 });
+  }
 }
