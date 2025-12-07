@@ -1,8 +1,8 @@
-export default function Home() {
+export default function HomePage() {
   return (
-    <div style={{ padding: 40 }}>
-      <h1>Zixcre8 AI</h1>
-      <p>Your Next.js app is running successfully.</p>
-    </div>
+    <main>
+      <h1>ZixCre8 AI</h1>
+      <p>Welcome to your Next.js project!</p>
+    </main>
   );
 }
