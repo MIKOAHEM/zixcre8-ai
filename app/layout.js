@@ -1,4 +1,5 @@
-import "../styles/globals.css";
+// app/layout.js
+import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
