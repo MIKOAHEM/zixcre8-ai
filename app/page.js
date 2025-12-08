@@ -1,40 +1,54 @@
 // app/page.js
 "use client";
 
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Scene from "@/components/Scene";
-import ChatWidget from "@/components/ChatWidget";
+import Footer from "@/components/Footer";
 
-export default function Home() {
-  const [news, setNews] = useState([]);
-
-  useEffect(() => {
-    fetch("/api/news")
-      .then((r) => r.json())
-      .then((d) => { if (d?.items) setNews(d.items); })
-      .catch(() => {});
-  }, []);
-
+export default function HomePage() {
   return (
     <>
       <section className="hero container">
         <div>
-          <h1>Create. Animate. Deploy — with ZixCre8 AI</h1>
-          <p className="muted">A modern creative playground: 3D scenes, motion UI, and AI tools in one place.</p>
+          <motion.h1
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            Create. Animate. Deploy — <span className="accent">ZixCre8 AI</span>
+          </motion.h1>
+
+          <motion.p
+            className="muted"
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.12 }}
+          >
+            A modern creative playground: 3D scenes, motion UI, and AI tools in one place.
+          </motion.p>
 
           <div style={{ marginTop: 24, display: "flex", gap: 12 }}>
-            <button className="button">Start Project</button>
-            <a className="small" href="#tools" style={{alignSelf:"center",textDecoration:"none",color:"var(--muted)"}}>Explore tools →</a>
+            <motion.button whileHover={{ scale: 1.03 }} className="button">
+              Start Project
+            </motion.button>
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              href="#tools"
+              className="small"
+              style={{ alignSelf: "center", textDecoration: "none", color: "var(--muted)" }}
+            >
+              Explore tools →
+            </motion.a>
           </div>
 
           <div className="grid">
             <div className="card">
               <div className="small">Realtime</div>
-              <div className="metrics"><strong>3D Preview</strong><span className="small">Interactive scenes with low latency</span></div>
+              <div className="metrics"><strong>3D Preview</strong><span className="small">Interactive scenes</span></div>
             </div>
             <div className="card">
               <div className="small">Motion</div>
-              <div className="metrics"><strong>Framer Animations</strong><span className="small">Smooth hero transitions</span></div>
+              <div className="metrics"><strong>Framer Animations</strong><span className="small">Smooth transitions</span></div>
             </div>
             <div className="card">
               <div className="small">AI</div>
@@ -48,21 +62,25 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="news" className="container" style={{marginTop:36}}>
-        <h2 style={{marginBottom:12}}>Latest</h2>
+      <section id="tools" className="container" style={{ marginTop: 28 }}>
+        <h2 style={{ marginBottom: 12 }}>Tools & Features</h2>
         <div className="grid">
-          {news.length === 0 ? (
-            <div className="card">No news yet.</div>
-          ) : news.map((n, i) => (
-            <div key={i} className="card">
-              <strong>{n.title}</strong>
-              <div className="small" style={{marginTop:6}}>{n.body}</div>
-            </div>
-          ))}
+          <div className="card">
+            <strong>Music & Lyrics</strong>
+            <div className="small">Generate melodies, chord progressions, and lyrics.</div>
+          </div>
+          <div className="card">
+            <strong>Graphics</strong>
+            <div className="small">Export images & vector assets with AI assistance.</div>
+          </div>
+          <div className="card">
+            <strong>3D</strong>
+            <div className="small">Interactive previews using react-three-fiber.</div>
+          </div>
         </div>
       </section>
 
-      <ChatWidget />
+      <Footer />
     </>
   );
 }
