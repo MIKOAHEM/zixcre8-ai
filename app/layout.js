@@ -4,21 +4,19 @@ import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "ZixCre8 AI",
-  description: "AI-powered creative studio — 3D UI, motion, bright aesthetic.",
+  description: "AI-powered creative studio — 3D, motion, chat",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Navbar />
-
-        {/* 3D Background Slideshow */}
-        <div id="background-3d"></div>
-
-        <main className="page-content">{children}</main>
-
-        <Footer />
+        <div className="page">
+          <Navbar />
+          <div id="background-3d" />
+          <main className="content-wrapper">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
