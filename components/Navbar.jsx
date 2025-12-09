@@ -1,24 +1,23 @@
-"use client";
-
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <header className="nav container" role="navigation">
-      <div className="brand">
-        <div className="logo">Z</div>
-        <div>
-          <div style={{ fontSize: 14, opacity: 0.95 }}>ZixCre8</div>
-          <div style={{ fontSize: 11, color: "var(--muted)" }}>AI studio</div>
-        </div>
+    <nav className="nav">
+      <div className="logo">ZixCre8</div>
+
+      <div className="menu-toggle" onClick={() => setOpen(!open)}>
+        ☰
       </div>
 
-      <nav className="nav-links small" aria-label="main">
-        <Link href="/" style={{ color: "var(--muted)", textDecoration: "none" }}>Home</Link>
-        <Link href="/#tools" style={{ color: "var(--muted)", textDecoration: "none" }}>Tools</Link>
-        <Link href="/#tools" style={{ color: "var(--muted)", textDecoration: "none" }}>Work</Link>
-        <button className="button">Get Started</button>
-      </nav>
-    </header>
+      <ul className={open ? "nav-links open" : "nav-links"}>
+        <li><Link href="/">Home</Link></li>
+        <li><Link href="/about">About</Link></li>
+        <li><Link href="/services">Services</Link></li>
+        <li><Link href="/contact">Contact</Link></li>
+      </ul>
+    </nav>
   );
 }
