@@ -1,7 +1,5 @@
 export default function Footer() {
   return (
-    <footer className="footer">
-      © {new Date().getFullYear()} ZixCre8 AI — Built with Next.js, R3F & Framer Motion
-    </footer>
+    <footer className="footer">© 2025 ZixCre8 AI — All Rights Reserved.</footer>
   );
 }
