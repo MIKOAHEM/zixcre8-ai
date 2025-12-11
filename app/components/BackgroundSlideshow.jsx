@@ -1,27 +1,26 @@
 "use client";
 import { useEffect, useState } from "react";
 
+const images = ["/bg1.jpg", "/bg2.jpg", "/bg3.jpg"];
+
 export default function BackgroundSlideshow() {
-  const images = ["/bg1.jpg", "/bg2.jpg", "/bg3.jpg"];
-  const [index, setIndex] = useState(0);
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % images.length);
-    }, 6000); // 6 seconds per image
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 5000); // 5 seconds per slide
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="slideshow-container">
-      {images.map((img, i) => (
-        <div
-          key={i}
-          className="slide"
-          style={{
-            backgroundImage: `url(${img})`,
-            opacity: index === i ? 1 : 0,
-          }}
+    <div className="fixed inset-0 w-full h-full -z-10">
+      {images.map((img, index) => (
+        <img
+          key={index}
+          src={img}
+          className={`absolute w-full h-full object-cover transition-opacity duration-[2000ms] 
+            ${current === index ? "opacity-100" : "opacity-0"}`}
         />
       ))}
     </div>
