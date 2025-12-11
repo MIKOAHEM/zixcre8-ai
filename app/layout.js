@@ -1,22 +1,21 @@
+// app/layout.js
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import BackgroundSlideshow from "./components/BackgroundSlideshow";
 
 export const metadata = {
   title: "ZixCre8 AI",
-  description: "AI-powered creative studio — 3D, motion, chat",
+  description: "AI-powered creative tools",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <div className="page">
-          <Navbar />
-          <div id="background-3d" />
-          <main className="content-wrapper">{children}</main>
-          <Footer />
-        </div>
+      <body className="relative overflow-hidden">
+        {/* 🔥 Global Background Slideshow */}
+        <BackgroundSlideshow />
+
+        {/* 🔥 Your main website content */}
+        <main className="relative z-10">{children}</main>
       </body>
     </html>
   );
