@@ -1,93 +1,43 @@
-/* RESET */
+/* global reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: "Poppins", sans-serif;
-  background: #ffffff;
   overflow-x: hidden;
   color: #222;
+  background: #fff;
 }
 
-/* 3D Background Wrapper */
+/* Full-screen background slideshow */
 #background-3d {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1;
+  z-index: -100;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  animation: changeBg 15s infinite ease-in-out;
+  animation: bgChange 15s infinite ease-in-out;
+  transition: background-image 1s ease-in-out;
 }
 
-/* Slideshow of bright 3D-style backgrounds */
-@keyframes changeBg {
-  0% { background-image: url('/bg1.jpg'); }
-  33% { background-image: url('/bg2.jpg'); }
-  66% { background-image: url('/bg3.jpg'); }
-  100% { background-image: url('/bg1.jpg'); }
+@keyframes bgChange {
+  0%   { background-image: url("/bg1.jpg"); }
+  33%  { background-image: url("/bg2.jpg"); }
+  66%  { background-image: url("/bg3.jpg"); }
+  100% { background-image: url("/bg1.jpg"); }
 }
 
-/* Hero Styling */
-.hero {
-  padding-top: 8rem;
-  text-align: center;
-  backdrop-filter: blur(6px);
-  background: rgba(255,255,255,0.5);
-  width: 90%;
-  margin: auto;
-  border-radius: 20px;
-  padding: 3rem;
-  box-shadow: 0 0 40px rgba(0,0,0,0.1);
-}
-.hero h1 {
-  font-size: 3rem;
-  font-weight: 700;
-}
-.hero p {
-  margin-top: 1rem;
-  font-size: 1.2rem;
-  opacity: 0.7;
-}
-.cta {
-  margin-top: 2rem;
-  padding: 1rem 2rem;
-  background: #0070f3;
-  color: white;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.cta:hover {
-  background: #0059c9;
-}
-/* Background slideshow container */
-.slideshow-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  z-index: -1;
-}
-
-/* Individual slides */
-.slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  transition: opacity 2s ease-in-out;
-  opacity: 0;
+/* Example page content wrapper to be above background */
+.content-wrapper {
+  position: relative;
+  z-index: 10;
+  background: rgba(255,255,255, 0.85);
+  min-height: 100vh;
+  padding: 0;
 }
