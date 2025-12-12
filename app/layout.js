@@ -1,4 +1,3 @@
-// app/layout.js
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,19 +11,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {/* Background slideshow (reads images from /public) */}
-        <div id="background-3d" aria-hidden="true"></div>
-
-        {/* Page content wrapper */}
+        <div id="background-3d"></div>
         <div className="content-wrapper">
           <Navbar />
-          <main style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-            {children}
-          </main>
+          <main>{children}</main>
           <Footer />
         </div>
       </body>
     </html>
   );
 }
-
