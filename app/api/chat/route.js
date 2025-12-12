@@ -1,43 +1,36 @@
 // app/api/chat/route.js
+import { NextResponse } from "next/server";
+
 export async function POST(req) {
   try {
     const { message } = await req.json();
-
-    if (!message) {
-      return new Response(JSON.stringify({ error: "No message provided" }), { status: 400 });
-    }
+    if (!message) return NextResponse.json({ error: "No message" }, { status: 400 });
 
     const OPENAI_KEY = process.env.OPENAI_API_KEY;
-
-    // If key not set, return a helpful message (client will show fallback)
     if (!OPENAI_KEY) {
-      return new Response(JSON.stringify({ reply: "No OpenAI key configured — set OPENAI_API_KEY in Vercel." }), { status: 200 });
+      // no key configured — return an informative response
+      return NextResponse.json({ reply: "OpenAI key not configured on server (mock fallback)." });
     }
 
-    // Call OpenAI Chat Completions (v1/chat/completions)
+    // call OpenAI (example using fetch to Chat Completions — adjust per your account)
     const resp = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${OPENAI_KEY}`,
-      },
+      headers: { "Authorization": `Bearer ${OPENAI_KEY}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         model: "gpt-4o-mini",
         messages: [{ role: "user", content: message }],
-        max_tokens: 300,
+        max_tokens: 300
       })
     });
 
     if (!resp.ok) {
       const txt = await resp.text();
-      return new Response(JSON.stringify({ error: txt }), { status: 500 });
+      return NextResponse.json({ error: txt }, { status: 500 });
     }
-
     const data = await resp.json();
     const reply = data?.choices?.[0]?.message?.content ?? "No reply";
-    return new Response(JSON.stringify({ reply }), { status: 200, headers: { "Content-Type": "application/json" } });
+    return NextResponse.json({ reply });
   } catch (err) {
-    console.error(err);
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
