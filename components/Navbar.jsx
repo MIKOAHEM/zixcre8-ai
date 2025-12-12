@@ -1,8 +1,26 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
   return (
-    <nav style={{ padding: "20px", background: "rgba(255,255,255,0.7)" }}>
-      <h2>ZixCre8 AI</h2>
-    </nav>
+    <header className="nav" role="navigation">
+      <div className="brand">
+        <div className="logo">ZixCre8</div>
+      </div>
+
+      <nav>
+        <div className="menu-toggle" onClick={() => setOpen(!open)}>☰</div>
+        <div className={open ? "nav-links open" : "nav-links"}>
+          <Link href="/">Home</Link>
+          <Link href="/#tools">Tools</Link>
+          <Link href="/#contact">Contact</Link>
+          <button className="cta" style={{ marginLeft: 12 }}>Get Started</button>
+        </div>
+      </nav>
+    </header>
   );
 }
+
