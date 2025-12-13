@@ -1,12 +1,11 @@
-export default function ContactPage() {
+export default function Contact() {
   return (
-    <section className="page-container">
-      <h1>Contact Us</h1>
-
-      <p>Email: <strong>zixcre8@gmail.com</strong></p>
-      <p>Phone: <strong>+2347017512874</strong></p>
-      <p>WhatsApp: <a href="https://wa.me/2347017512874">Open Chat</a></p>
-      <p>TikTok: <strong>@mikoahem</strong></p>
-    </section>
+    <div>
+      <h1>Contact</h1>
+      <p>Email: zixcre8@gmail.com</p>
+      <p>Phone: +2347017512874</p>
+      <a href="https://wa.me/2347017512874">WhatsApp</a>
+      <p>TikTok: @mikoahem</p>
+    </div>
   );
 }
