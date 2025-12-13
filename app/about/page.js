@@ -1,15 +1,10 @@
-export default function About() {
+export default function AboutPage() {
   return (
-    <>
-      <Navbar />
-      <section className="page">
-        <h1>About ZixCre8 AI</h1>
-        <p>
-          ZixCre8 AI is a creative powerhouse built to assist designers, writers,
-          filmmakers, musicians, and innovators with high‑quality AI tools.
-        </p>
-      </section>
-      <Footer />
-    </>
+    <section className="page-container">
+      <h1>About ZixCre8 AI</h1>
+      <p>
+        ZixCre8 AI is your all-in-one platform for creativity, animation, and AI-powered tools.
+      </p>
+    </section>
   );
 }
